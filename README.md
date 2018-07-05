@@ -1,2 +1,2 @@
 # demoApp
-quick test for demo purposes
+A quick test for demo purposes.
