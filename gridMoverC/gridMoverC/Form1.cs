@@ -44,6 +44,9 @@ namespace gridMoverC
             Point mHover = e.Location;
             lbl_health.Text = mHover.X.ToString();
             lbl_shield.Text = mHover.Y.ToString();
+            BoardImg bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
+            bmp.drawgrid(mHover);
+            pbx_board.Image = bmp.layout;
         }
     }
 }

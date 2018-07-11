@@ -45,7 +45,10 @@ namespace gridMoverC
                         g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                     }
                 }
+                int mouseRow = hover.X / (layout.Width/10);
+                int mouseCol = hover.Y / (layout.Height/5);
 
+                g.FillRectangle(Brushes.Red, mouseRow * boxwidth, mouseCol * boxwidth, boxwidth, boxwidth);
             }
         }
     }
