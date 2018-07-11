@@ -28,19 +28,8 @@ namespace gridMoverC
             pbx_board.Height = 300;
             pbx_board.Width = 600;
             pbx_board.Location = new Point(100, 25);
-            Bitmap bmp = new Bitmap(pbx_board.Width, pbx_board.Height);
-            int boxwidth = (pbx_board.Width / 10)-1;
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                for (int Row = 0; Row < 5; Row++ )
-                {
-                    for (int Col  = 0; Col < 10; Col++)
-                    {
-                        g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                    }
-                }
-                pbx_board.Image = bmp;
-            }
+            BoardImg bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
+            pbx_board.Image = bmp.layout;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,7 +41,7 @@ namespace gridMoverC
 
         private void pbx_board_MouseHover(object sender, MouseEventArgs e)
         {
-            Point mHover = Cursor.Position;
+            Point mHover = e.Location;
             lbl_health.Text = mHover.X.ToString();
             lbl_shield.Text = mHover.Y.ToString();
         }
