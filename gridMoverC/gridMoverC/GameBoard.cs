@@ -11,6 +11,7 @@ namespace gridMoverC
     class BoardImg 
     {
         public Bitmap layout = null;
+        private Image floor = Image.FromFile("//ran/qe2root/QE2StaffUser/snhsMLON/Documents/gitHubApps/gridMoverC/gridMoverC/Resources/floor.png");
         public BoardImg(int width, int height)
         {
             layout = new Bitmap(width, height);
@@ -19,6 +20,7 @@ namespace gridMoverC
 
         public void drawgrid()
         {
+            
             int boxwidth = (layout.Width / 10) - 1;
             using (Graphics g = Graphics.FromImage(layout))
             {
@@ -26,7 +28,9 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
+                        g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                         g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+
                     }
                 }
                 
@@ -42,7 +46,9 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
+                        g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth,boxwidth);
                         g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                        
                     }
                 }
                 int mouseRow = hover.X / (layout.Width/10);

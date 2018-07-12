@@ -49,6 +49,7 @@
             this.pbx_board.Size = new System.Drawing.Size(600, 300);
             this.pbx_board.TabIndex = 0;
             this.pbx_board.TabStop = false;
+            this.pbx_board.MouseLeave += new System.EventHandler(this.pbx_board_MouseLeave);
             this.pbx_board.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbx_board_MouseHover);
             // 
             // pbx_moves

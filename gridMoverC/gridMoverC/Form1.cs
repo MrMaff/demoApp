@@ -12,6 +12,8 @@ namespace gridMoverC
 {
     public partial class frm_board : Form
     {
+        BoardImg bmp;
+
         public frm_board()
         {
             InitializeComponent();
@@ -19,7 +21,7 @@ namespace gridMoverC
 
         private void frm_board_Load(object sender, EventArgs e)
         {
-            
+            bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
             DrawBoard();
         }
 
@@ -28,7 +30,6 @@ namespace gridMoverC
             pbx_board.Height = 300;
             pbx_board.Width = 600;
             pbx_board.Location = new Point(100, 25);
-            BoardImg bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
             pbx_board.Image = bmp.layout;
         }
 
@@ -44,8 +45,13 @@ namespace gridMoverC
             Point mHover = e.Location;
             lbl_health.Text = mHover.X.ToString();
             lbl_shield.Text = mHover.Y.ToString();
-            BoardImg bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
             bmp.drawgrid(mHover);
+            pbx_board.Image = bmp.layout;
+        }
+
+        private void pbx_board_MouseLeave(object sender, EventArgs e)
+        {
+            bmp.drawgrid();
             pbx_board.Image = bmp.layout;
         }
     }
