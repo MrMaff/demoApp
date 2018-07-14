@@ -11,7 +11,7 @@ namespace gridMoverC
     class BoardImg 
     {
         public Bitmap layout = null;
-        private Image floor = Image.FromFile("//ran/qe2root/QE2StaffUser/snhsMLON/Documents/gitHubApps/gridMoverC/gridMoverC/Resources/floor.png");
+        private Image floor = Image.FromFile(@"Resources\floor.png");
         public BoardImg(int width, int height)
         {
             layout = new Bitmap(width, height);
