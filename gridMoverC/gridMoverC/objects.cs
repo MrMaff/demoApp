@@ -17,8 +17,8 @@ namespace gridMoverC
 
     class character : objects
     {
-        private int health = 0;
-        private int shield = 0;
+        public int health = 0;
+        public int shield = 0;
         private int movesPerTurn = 1;
         private int attack = 2;
         public int xloc;

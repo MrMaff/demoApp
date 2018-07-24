@@ -27,8 +27,10 @@ namespace gridMoverC
         private void frm_board_Load(object sender, EventArgs e)
         {
             loadMap();
-            player = new character("Hero", 10, 2, 0);
-            grid[2, 0].inspace = player;
+            player = new character("Hero", 10, 0, 2);
+            lbl_health.Text = player.health.ToString();
+            lbl_shield.Text = player.shield.ToString();
+            grid[player.yloc, player.xloc].inspace = player;
             bmp = new BoardImg(pbx_board.Width, pbx_board.Height, grid);
             DrawBoard();
         }
@@ -50,13 +52,23 @@ namespace gridMoverC
         private void pbx_board_MouseHover(object sender, MouseEventArgs e)
         {
             Point mHover = e.Location;
-            lbl_health.Text = mHover.X.ToString();
-            lbl_shield.Text = mHover.Y.ToString();
-            int mouseRow = mHover.X / (600 / 10);
-            int mouseCol = mHover.Y / (300 / 5);
+            int mouseCol = mHover.X / (600 / 10);
+            int mouseRow = mHover.Y / (300 / 5);
+            int Xdif = (mouseCol) - (player.xloc) ;
+            int ydif = (mouseRow) - (player.yloc);
             if (mouseCol != lastMouseCol || mouseRow != lastMouseRow)
             {
-                bmp.drawgrid(mHover);
+                if ((mouseRow == player.yloc)&&( Xdif == 1|| Xdif == -1))
+                {
+                    bmp.drawgrid(mHover, "G");
+                }
+                else if ((mouseCol == player.xloc) && (ydif == 1 || ydif == -1))
+                {
+                    bmp.drawgrid(mHover, "G");
+                }
+                else bmp.drawgrid(mHover,"R");
+
+
                 pbx_board.Image = bmp.layout;
             }
             

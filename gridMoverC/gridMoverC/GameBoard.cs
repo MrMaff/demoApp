@@ -48,9 +48,18 @@ namespace gridMoverC
             }
         }
 
-        public void drawgrid(Point hover)
+        public void drawgrid(Point hover, string colour)
         {
             int boxwidth = (layout.Width / 10) - 1;
+            SolidBrush highlight = new SolidBrush(Color.FromArgb(128, 0, 0, 255));
+            if (colour == "R")
+            {
+                highlight = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+            }
+            if (colour == "G")
+            {
+                highlight = new SolidBrush(Color.FromArgb(128, 0, 255, 0));
+            }
             using (Graphics g = Graphics.FromImage(layout))
             {
                 for (int Row = 0; Row < 5; Row++)
@@ -72,7 +81,7 @@ namespace gridMoverC
                 if (grid[mouseRow,mouseCol].walkAble == true)
                 {
 
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(128, 255, 0, 0)), mouseCol * boxwidth, mouseRow * boxwidth, boxwidth, boxwidth);
+                    g.FillRectangle(highlight, mouseCol * boxwidth, mouseRow * boxwidth, boxwidth, boxwidth);
                 }
             }
         }
