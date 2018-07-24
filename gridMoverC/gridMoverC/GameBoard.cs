@@ -40,7 +40,7 @@ namespace gridMoverC
                         {
                             g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                         }
-                        g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                       // g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
 
                     }
                 }
@@ -72,7 +72,7 @@ namespace gridMoverC
                         {
                             g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                         }
-                        g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                        //g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                         
                     }
                 }

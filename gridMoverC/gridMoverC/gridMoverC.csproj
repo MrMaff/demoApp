@@ -114,6 +114,8 @@
     <None Include="Resources\stimpack.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\hero.png" />
+    <None Include="Resources\monster.png" />
     <Content Include="Resources\TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

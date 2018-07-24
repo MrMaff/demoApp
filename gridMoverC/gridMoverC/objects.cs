@@ -33,11 +33,11 @@ namespace gridMoverC
             this.name = name;
             if (name == "Hero")
             {
-                this.icon = Properties.Resources.stimpack;
+                this.icon = Properties.Resources.hero;
             }
-            if (name == "Hero")
+            if (name == "Monster")
             {
-                this.icon = Properties.Resources.medpack;
+                this.icon = Properties.Resources.monster;
             }
         }
     }
