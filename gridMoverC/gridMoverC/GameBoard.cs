@@ -12,60 +12,17 @@ namespace gridMoverC
     class BoardImg 
     {
         public Bitmap layout = null;
-        private Image floor = Properties.Resources.floor;
-        private Image barrier = Properties.Resources.barrier;
-        private Image enter = Properties.Resources.enter;
-        private Image exit = Properties.Resources.exit;
-        private tile[,] grid = new tile[5, 10];
-        public BoardImg(int width, int height)
+        private tile[,] grid;
+
+
+        public BoardImg(int width, int height, tile[,] grid)
         {
             layout = new Bitmap(width, height);
-            loadMap();
+            this.grid = grid;
             drawgrid();
         }
 
-        private void loadMap()
-        {
-            using (BinaryReader lvlMap = new BinaryReader(File.Open(@"C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\Resources\demoLvl.dat", FileMode.Open)))
-            {
-                for (int Col = 0; Col < 10; Col++)
-                {
-                    for (int Row = 0; Row < 5; Row++)
-                    {
-                        grid[Row, Col] = new tile();
-                        grid[Row, Col].mapTile = lvlMap.ReadChar();
-                    }
-                }
-                for (int Col = 0; Col < 10; Col++)
-                {
-                    for (int Row = 0; Row < 5; Row++)
-                    {
-                        char tempObj = lvlMap.ReadChar();
-                        if (tempObj == 'M')
-                        {
-                            grid[Row, Col].inspace = new objects();
-                            grid[Row, Col].inspace.icon = Properties.Resources.medpack;
-                            grid[Row, Col].inspace.walkable = true;
-                        }
-                        if (tempObj == 'S')
-                        {
-                            grid[Row, Col].inspace = new objects();
-                            grid[Row, Col].inspace.icon = Properties.Resources.stimpack;
-                            grid[Row, Col].inspace.walkable = true;
-                        }
-                    }
-                }
-            }
-            //temp item load
-            //grid[0,5].inspace = new objects();
-            //grid[0, 5].inspace.icon = Properties.Resources.stimpack;
-            //grid[0, 5].inspace.walkable = true;
-            //grid[4, 7].inspace = new objects();
-            //grid[4, 7].inspace.icon = Properties.Resources.medpack;
-            //grid[4, 7].inspace.walkable = true;
-
-
-        }
+        
 
         public void drawgrid()
         {
@@ -77,21 +34,8 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
-                        switch (grid[Row,Col].mapTile)
-                        {
-                            case 'B':
-                                g.DrawImage(barrier, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            case 'X':
-                                g.DrawImage(exit, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            case 'E':
-                                g.DrawImage(enter, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            default:
-                                g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                        }
+                        g.DrawImage(grid[Row, Col].icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                                
                         if (grid[Row,Col].inspace != null)
                         {
                             g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
@@ -113,21 +57,8 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
-                        switch (grid[Row, Col].mapTile)
-                        {
-                            case 'B':
-                                g.DrawImage(barrier, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            case 'X':
-                                g.DrawImage(exit, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            case 'E':
-                                g.DrawImage(enter, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                            default:
-                                g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
-                                break;
-                        }
+                        g.DrawImage(grid[Row, Col].icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+
                         if (grid[Row, Col].inspace != null)
                         {
                             g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace gridMoverC
 {
@@ -15,6 +16,8 @@ namespace gridMoverC
         BoardImg bmp;
         int lastMouseRow = -1;
         int lastMouseCol = -1;
+        tile[,] grid = new tile[5, 10];
+        character player;
 
         public frm_board()
         {
@@ -23,7 +26,10 @@ namespace gridMoverC
 
         private void frm_board_Load(object sender, EventArgs e)
         {
-            bmp = new BoardImg(pbx_board.Width, pbx_board.Height);
+            loadMap();
+            player = new character("Hero", 10, 2, 0);
+            grid[2, 0].inspace = player;
+            bmp = new BoardImg(pbx_board.Width, pbx_board.Height, grid);
             DrawBoard();
         }
 
@@ -62,6 +68,50 @@ namespace gridMoverC
             pbx_board.Image = bmp.layout;
             lastMouseRow = -1;
             lastMouseCol = -1;
+        }
+        
+    
+        private void loadMap()
+        {
+            using (BinaryReader lvlMap = new BinaryReader(File.Open(@"C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\Resources\demoLvl.dat", FileMode.Open)))
+            {
+                for (int Col = 0; Col < 10; Col++)
+                {
+                    for (int Row = 0; Row < 5; Row++)
+                    {
+                        grid[Row, Col] = new tile();
+                        grid[Row, Col].mapTile = lvlMap.ReadChar();
+                    }
+                }
+                for (int Col = 0; Col < 10; Col++)
+                {
+                    for (int Row = 0; Row < 5; Row++)
+                    {
+                        char tempObj = lvlMap.ReadChar();
+                        if (tempObj == 'M')
+                        {
+                            grid[Row, Col].inspace = new objects();
+                            grid[Row, Col].inspace.icon = Properties.Resources.medpack;
+                            grid[Row, Col].inspace.walkable = true;
+                        }
+                        if (tempObj == 'S')
+                        {
+                            grid[Row, Col].inspace = new objects();
+                            grid[Row, Col].inspace.icon = Properties.Resources.stimpack;
+                            grid[Row, Col].inspace.walkable = true;
+                        }
+                    }
+                }
+            }
+            //temp item load
+            //grid[0,5].inspace = new objects();
+            //grid[0, 5].inspace.icon = Properties.Resources.stimpack;
+            //grid[0, 5].inspace.walkable = true;
+            //grid[4, 7].inspace = new objects();
+            //grid[4, 7].inspace.icon = Properties.Resources.medpack;
+            //grid[4, 7].inspace.walkable = true;
+
+
         }
     }
 }
