@@ -13,6 +13,8 @@ namespace gridMoverC
     public partial class frm_board : Form
     {
         BoardImg bmp;
+        int lastMouseRow = -1;
+        int lastMouseCol = -1;
 
         public frm_board()
         {
@@ -37,7 +39,6 @@ namespace gridMoverC
         {
 
         }
-
        
 
         private void pbx_board_MouseHover(object sender, MouseEventArgs e)
@@ -45,14 +46,22 @@ namespace gridMoverC
             Point mHover = e.Location;
             lbl_health.Text = mHover.X.ToString();
             lbl_shield.Text = mHover.Y.ToString();
-            bmp.drawgrid(mHover);
-            pbx_board.Image = bmp.layout;
+            int mouseRow = mHover.X / (600 / 10);
+            int mouseCol = mHover.Y / (300 / 5);
+            if (mouseCol != lastMouseCol || mouseRow != lastMouseRow)
+            {
+                bmp.drawgrid(mHover);
+                pbx_board.Image = bmp.layout;
+            }
+            
         }
 
         private void pbx_board_MouseLeave(object sender, EventArgs e)
         {
             bmp.drawgrid();
             pbx_board.Image = bmp.layout;
+            lastMouseRow = -1;
+            lastMouseCol = -1;
         }
     }
 }

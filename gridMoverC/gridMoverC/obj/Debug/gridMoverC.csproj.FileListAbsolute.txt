@@ -30,3 +30,5 @@ C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\
 C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\enter.png
 C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\exit.png
 C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\demoLvl.dat
+C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\medpack.png
+C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\bin\Debug\Resources\stimpack.png

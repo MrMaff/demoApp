@@ -16,7 +16,7 @@ namespace gridMoverC
         private Image barrier = Properties.Resources.barrier;
         private Image enter = Properties.Resources.enter;
         private Image exit = Properties.Resources.exit;
-        private char[,] grid = new char[5, 10];
+        private tile[,] grid = new tile[5, 10];
         public BoardImg(int width, int height)
         {
             layout = new Bitmap(width, height);
@@ -32,10 +32,18 @@ namespace gridMoverC
                 {
                     for (int Row = 0; Row < 5; Row++)
                     {
-                        grid[Row, Col] = lvlMap.ReadChar();
+                        grid[Row, Col] = new tile();
+                        grid[Row, Col].mapTile = lvlMap.ReadChar();
                     }
                 }
             }
+            //temp item load
+            grid[0,5].inspace = new objects();
+            grid[0, 5].inspace.icon = Properties.Resources.stimpack;
+            grid[0, 5].inspace.walkable = true;
+            grid[4, 7].inspace = new objects();
+            grid[4, 7].inspace.icon = Properties.Resources.medpack;
+            grid[4, 7].inspace.walkable = true;
         }
 
         public void drawgrid()
@@ -48,7 +56,7 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
-                        switch (grid[Row,Col])
+                        switch (grid[Row,Col].mapTile)
                         {
                             case 'B':
                                 g.DrawImage(barrier, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
@@ -63,7 +71,10 @@ namespace gridMoverC
                                 g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                                 break;
                         }
-
+                        if (grid[Row,Col].inspace != null)
+                        {
+                            g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                        }
                         g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
 
                     }
@@ -81,7 +92,7 @@ namespace gridMoverC
                 {
                     for (int Col = 0; Col < 10; Col++)
                     {
-                        switch (grid[Row, Col])
+                        switch (grid[Row, Col].mapTile)
                         {
                             case 'B':
                                 g.DrawImage(barrier, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
@@ -96,14 +107,21 @@ namespace gridMoverC
                                 g.DrawImage(floor, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                                 break;
                         }
+                        if (grid[Row, Col].inspace != null)
+                        {
+                            g.DrawImage(grid[Row, Col].inspace.icon, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
+                        }
                         g.DrawRectangle(Pens.Black, Col * boxwidth, Row * boxwidth, boxwidth, boxwidth);
                         
                     }
                 }
-                int mouseRow = hover.X / (layout.Width/10);
-                int mouseCol = hover.Y / (layout.Height/5);
+                int mouseCol = hover.X / (layout.Width/10);
+                int mouseRow = hover.Y / (layout.Height/5);
+                if (grid[mouseRow,mouseCol].walkAble == true)
+                {
 
-                g.FillRectangle(Brushes.Red, mouseRow * boxwidth, mouseCol * boxwidth, boxwidth, boxwidth);
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(128, 255, 0, 0)), mouseCol * boxwidth, mouseRow * boxwidth, boxwidth, boxwidth);
+                }
             }
         }
     }

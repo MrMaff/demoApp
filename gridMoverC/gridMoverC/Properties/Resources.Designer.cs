@@ -71,6 +71,16 @@ namespace gridMoverC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] demoLvl {
+            get {
+                object obj = ResourceManager.GetObject("demoLvl", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap enter {
@@ -96,6 +106,26 @@ namespace gridMoverC.Properties {
         internal static System.Drawing.Bitmap floor {
             get {
                 object obj = ResourceManager.GetObject("floor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap medpack {
+            get {
+                object obj = ResourceManager.GetObject("medpack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stimpack {
+            get {
+                object obj = ResourceManager.GetObject("stimpack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
