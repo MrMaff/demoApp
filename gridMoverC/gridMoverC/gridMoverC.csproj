@@ -87,6 +87,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\demoLvl.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\enter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
