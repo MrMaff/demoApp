@@ -36,14 +36,35 @@ namespace gridMoverC
                         grid[Row, Col].mapTile = lvlMap.ReadChar();
                     }
                 }
+                for (int Col = 0; Col < 10; Col++)
+                {
+                    for (int Row = 0; Row < 5; Row++)
+                    {
+                        char tempObj = lvlMap.ReadChar();
+                        if (tempObj == 'M')
+                        {
+                            grid[Row, Col].inspace = new objects();
+                            grid[Row, Col].inspace.icon = Properties.Resources.medpack;
+                            grid[Row, Col].inspace.walkable = true;
+                        }
+                        if (tempObj == 'S')
+                        {
+                            grid[Row, Col].inspace = new objects();
+                            grid[Row, Col].inspace.icon = Properties.Resources.stimpack;
+                            grid[Row, Col].inspace.walkable = true;
+                        }
+                    }
+                }
             }
             //temp item load
-            grid[0,5].inspace = new objects();
-            grid[0, 5].inspace.icon = Properties.Resources.stimpack;
-            grid[0, 5].inspace.walkable = true;
-            grid[4, 7].inspace = new objects();
-            grid[4, 7].inspace.icon = Properties.Resources.medpack;
-            grid[4, 7].inspace.walkable = true;
+            //grid[0,5].inspace = new objects();
+            //grid[0, 5].inspace.icon = Properties.Resources.stimpack;
+            //grid[0, 5].inspace.walkable = true;
+            //grid[4, 7].inspace = new objects();
+            //grid[4, 7].inspace.icon = Properties.Resources.medpack;
+            //grid[4, 7].inspace.walkable = true;
+
+
         }
 
         public void drawgrid()

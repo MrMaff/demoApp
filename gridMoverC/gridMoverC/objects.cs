@@ -20,6 +20,26 @@ namespace gridMoverC
         private int health = 0;
         private int shield = 0;
         private int movesPerTurn = 1;
+        private int attack = 2;
+        public int xloc;
+        public int yloc;
+
+        public character(string name, int health, int xloc, int yloc)
+        {
+            this.health = health;
+            this.xloc = xloc;
+            this.yloc = yloc;
+            this.walkable = false;
+            this.name = name;
+            if (name == "Hero")
+            {
+                this.icon = Properties.Resources.stimpack;
+            }
+            if (name == "Hero")
+            {
+                this.icon = Properties.Resources.medpack;
+            }
+        }
     }
 
 }
