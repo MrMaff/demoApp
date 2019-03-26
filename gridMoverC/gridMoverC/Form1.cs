@@ -85,7 +85,7 @@ namespace gridMoverC
     
         private void loadMap()
         {
-            using (BinaryReader lvlMap = new BinaryReader(File.Open(@"C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\Resources\demoLvl.dat", FileMode.Open)))
+            using (BinaryReader lvlMap = new BinaryReader(File.Open(@"resources/demoLvl.dat", FileMode.Open)))
             {
                 for (int Col = 0; Col < 10; Col++)
                 {
