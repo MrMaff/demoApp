@@ -22,5 +22,29 @@ namespace SimpleCalc
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            answer = 0;
+            tbx_Screen.Text = answer.ToString();
+        }
+
+        private void add2display(int num)
+        {
+            if (tbx_Screen.Text != "0")
+            {
+                tbx_Screen.Text = tbx_Screen.Text + num.ToString();
+            }
+            else
+            {
+                tbx_Screen.Text = num.ToString();
+            }
+        }
+
+        private void numClick(object sender, EventArgs e)
+        {
+            string buttonNum = (sender as Button).Text;
+            add2display(int.Parse(buttonNum));
+        }
     }
 }
