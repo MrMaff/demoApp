@@ -12,7 +12,6 @@ namespace SimpleCalc
 {
     public partial class Form1 : Form
     {
-        decimal answer = 0;
         decimal mem1 = 0;
         decimal mem2 = 0;
         string lastOp = "";
@@ -25,8 +24,7 @@ namespace SimpleCalc
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            answer = 0;
-            tbx_Screen.Text = answer.ToString();
+            tbx_Screen.Text = "0";
         }
 
         private void add2display(int num)
@@ -45,6 +43,43 @@ namespace SimpleCalc
         {
             string buttonNum = (sender as Button).Text;
             add2display(int.Parse(buttonNum));
+        }
+
+        private void operClick(object sender, EventArgs e)
+        {
+            if (currentOp != "")
+            {
+                mem2 = decimal.Parse(tbx_Screen.Text);
+                tbx_Screen.Text = calcAnswer().ToString();
+            }
+            mem1 = decimal.Parse(tbx_Screen.Text);
+            currentOp = (sender as Button).Text;
+        }
+
+        private decimal calcAnswer()
+        {
+            decimal answer = 0;
+
+            switch (currentOp)
+            {
+                case "+":
+                    answer = mem1 + mem2;
+                    break;
+                case "-":
+                    answer = mem1 - mem2;
+                    break;
+                case "X":
+                    answer = mem1 * mem2;
+                    break;
+                case "÷":
+                    answer = mem1 / mem2;
+                    break;
+                default:
+                    break;
+            }
+            currentOp = "";
+            return answer;
+
         }
     }
 }
