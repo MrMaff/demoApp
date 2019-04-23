@@ -25,33 +25,35 @@ namespace gridMoverC
         }
 
         private void loadMap()
-        {
-            using (BinaryReader lvlMap = new BinaryReader(File.Open(@"C:\Users\SNHSmlon\Documents\GitFolder\gridMoverC\gridMoverC\Resources\demoLvl.dat", FileMode.Open)))
+        {using (MemoryStream levelDataStream = new MemoryStream(Properties.Resources.demoLvl))
             {
-                for (int Col = 0; Col < 10; Col++)
+                using (BinaryReader lvlMap = new BinaryReader(levelDataStream))
                 {
-                    for (int Row = 0; Row < 5; Row++)
+                    for (int Col = 0; Col < 10; Col++)
                     {
-                        grid[Row, Col] = new tile();
-                        grid[Row, Col].mapTile = lvlMap.ReadChar();
-                    }
-                }
-                for (int Col = 0; Col < 10; Col++)
-                {
-                    for (int Row = 0; Row < 5; Row++)
-                    {
-                        char tempObj = lvlMap.ReadChar();
-                        if (tempObj == 'M')
+                        for (int Row = 0; Row < 5; Row++)
                         {
-                            grid[Row, Col].inspace = new objects();
-                            grid[Row, Col].inspace.icon = Properties.Resources.medpack;
-                            grid[Row, Col].inspace.walkable = true;
+                            grid[Row, Col] = new tile();
+                            grid[Row, Col].mapTile = lvlMap.ReadChar();
                         }
-                        if (tempObj == 'S')
+                    }
+                    for (int Col = 0; Col < 10; Col++)
+                    {
+                        for (int Row = 0; Row < 5; Row++)
                         {
-                            grid[Row, Col].inspace = new objects();
-                            grid[Row, Col].inspace.icon = Properties.Resources.stimpack;
-                            grid[Row, Col].inspace.walkable = true;
+                            char tempObj = lvlMap.ReadChar();
+                            if (tempObj == 'M')
+                            {
+                                grid[Row, Col].inspace = new objects();
+                                grid[Row, Col].inspace.icon = Properties.Resources.medpack;
+                                grid[Row, Col].inspace.walkable = true;
+                            }
+                            if (tempObj == 'S')
+                            {
+                                grid[Row, Col].inspace = new objects();
+                                grid[Row, Col].inspace.icon = Properties.Resources.stimpack;
+                                grid[Row, Col].inspace.walkable = true;
+                            }
                         }
                     }
                 }
