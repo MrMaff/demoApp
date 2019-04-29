@@ -26,6 +26,7 @@ namespace SimpleCalc
         {
             screenText = "0";
             UpdateDisplay();
+            this.Icon = Properties.Resources.calculator;
         }
 
         private void UpdateDisplay()
