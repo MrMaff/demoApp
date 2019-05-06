@@ -30,7 +30,7 @@
         {
             this.pbx_Board = new System.Windows.Forms.PictureBox();
             this.pbx_Dice = new System.Windows.Forms.PictureBox();
-            this.tbx_PlayerName = new System.Windows.Forms.Label();
+            this.lbl_PlayerName = new System.Windows.Forms.Label();
             this.btn_RollDice = new System.Windows.Forms.Button();
             this.btn_Next = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Board)).BeginInit();
@@ -53,14 +53,14 @@
             this.pbx_Dice.TabIndex = 1;
             this.pbx_Dice.TabStop = false;
             // 
-            // tbx_PlayerName
+            // lbl_PlayerName
             // 
-            this.tbx_PlayerName.AutoSize = true;
-            this.tbx_PlayerName.Location = new System.Drawing.Point(667, 13);
-            this.tbx_PlayerName.Name = "tbx_PlayerName";
-            this.tbx_PlayerName.Size = new System.Drawing.Size(51, 20);
-            this.tbx_PlayerName.TabIndex = 2;
-            this.tbx_PlayerName.Text = "label1";
+            this.lbl_PlayerName.AutoSize = true;
+            this.lbl_PlayerName.Location = new System.Drawing.Point(667, 13);
+            this.lbl_PlayerName.Name = "lbl_PlayerName";
+            this.lbl_PlayerName.Size = new System.Drawing.Size(98, 20);
+            this.lbl_PlayerName.TabIndex = 2;
+            this.lbl_PlayerName.Text = "Player Name";
             // 
             // btn_RollDice
             // 
@@ -80,6 +80,7 @@
             this.btn_Next.TabIndex = 4;
             this.btn_Next.Text = "Next Player";
             this.btn_Next.UseVisualStyleBackColor = true;
+            this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
             // Game
             // 
@@ -88,11 +89,12 @@
             this.ClientSize = new System.Drawing.Size(1015, 624);
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.btn_RollDice);
-            this.Controls.Add(this.tbx_PlayerName);
+            this.Controls.Add(this.lbl_PlayerName);
             this.Controls.Add(this.pbx_Dice);
             this.Controls.Add(this.pbx_Board);
             this.Name = "Game";
             this.Text = "Game";
+            this.Load += new System.EventHandler(this.Game_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Board)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Dice)).EndInit();
             this.ResumeLayout(false);
@@ -104,7 +106,7 @@
 
         private System.Windows.Forms.PictureBox pbx_Board;
         private System.Windows.Forms.PictureBox pbx_Dice;
-        private System.Windows.Forms.Label tbx_PlayerName;
+        private System.Windows.Forms.Label lbl_PlayerName;
         private System.Windows.Forms.Button btn_RollDice;
         private System.Windows.Forms.Button btn_Next;
     }

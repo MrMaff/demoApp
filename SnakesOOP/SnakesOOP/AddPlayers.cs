@@ -36,20 +36,21 @@ namespace SnakesOOP
 
         private void btn_PlayGame_Click(object sender, EventArgs e)
         {
-            Game game = new Game(players);
-            game.Show();
-            this.Close();
-            this.DialogResult = DialogResult.OK;
+            playGame();
         }
 
         private void btn_AddNewPlayer_Click(object sender, EventArgs e)
         {
             players.Enqueue(new Player(tbx_Name.Text, cbx_colours.Text));
-            cbx_colours.Items.Remove(cbx_colours.SelectedItem);
-            tbx_Name.Text = "";
-            cbx_colours.SelectedIndex = 0;
-            updateInstructions();
-            CheckReadyToPlay();
+            if (players.Count<4)
+            {
+                cbx_colours.Items.Remove(cbx_colours.SelectedItem);
+                tbx_Name.Text = "";
+                cbx_colours.SelectedIndex = 0;
+                updateInstructions();
+                CheckReadyToPlay();
+            }
+            else { playGame(); }
         }
 
         private void updateInstructions()
@@ -67,6 +68,14 @@ namespace SnakesOOP
             {
                 btn_AddNewPlayer.Enabled = false;
             }
+        }
+
+        private void playGame()
+        {
+            Game game = new Game(players);
+            game.Show();
+            this.Close();
+            this.DialogResult = DialogResult.OK;
         }
     }
 }
