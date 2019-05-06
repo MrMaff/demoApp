@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakesOOP
 {
-    class Player
+    public class Player
     {
         //Fields
         private string name;
@@ -37,6 +37,7 @@ namespace SnakesOOP
         public Player()
         {
             this.winner = false;
+            location = 1;
         }
 
         public Player(string name, string colour)

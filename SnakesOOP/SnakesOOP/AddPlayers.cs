@@ -36,6 +36,9 @@ namespace SnakesOOP
 
         private void btn_PlayGame_Click(object sender, EventArgs e)
         {
+            Game game = new Game(players);
+            game.Show();
+            this.Close();
             this.DialogResult = DialogResult.OK;
         }
 

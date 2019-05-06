@@ -26,13 +26,13 @@ namespace SnakesOOP
         {
             AddPlayers newPlayers = new AddPlayers();
             this.Hide();
-            newPlayers.ShowDialog();
-            this.Show();
+            //newPlayers.ShowDialog();
+            //this.Show();
 
-            //if (newPlayers.ShowDialog()== DialogResult.Cancel)
-            //{
-            //    this.Show();
-            //}
+            if (newPlayers.ShowDialog() == DialogResult.Cancel)
+            {
+                this.Show();
+            }
 
         }
     }
