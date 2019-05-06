@@ -13,12 +13,13 @@ namespace SnakesOOP
     public partial class AddPlayers : Form
     {
         Queue<Player> players = new Queue<Player>();
+        Form topForm;
 
-
-        public AddPlayers()
+        public AddPlayers(Form topForm)
         {
             InitializeComponent();
             players.Clear();
+            this.topForm = topForm;
         }
 
         private void AddPlayers_Load(object sender, EventArgs e)
@@ -72,7 +73,7 @@ namespace SnakesOOP
 
         private void playGame()
         {
-            Game game = new Game(players);
+            Game game = new Game(players, topForm);
             game.Show();
             this.Close();
             this.DialogResult = DialogResult.OK;

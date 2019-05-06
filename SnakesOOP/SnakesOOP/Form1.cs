@@ -24,7 +24,7 @@ namespace SnakesOOP
 
         private void btn_NewGame_Click(object sender, EventArgs e)
         {
-            AddPlayers newPlayers = new AddPlayers();
+            AddPlayers newPlayers = new AddPlayers(this);
             this.Hide();
             //newPlayers.ShowDialog();
             //this.Show();

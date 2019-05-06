@@ -12,7 +12,7 @@ namespace SnakesOOP
         private string name;
         private string colour;
         private bool winner;
-        private int location;
+        private Square location;
 
         // Properties
         public string Name
@@ -27,7 +27,7 @@ namespace SnakesOOP
             set { this.winner = value; }
         }
 
-        public int Location
+        public Square Location
         {
             get { return location; }
             set { this.location = value; }
@@ -37,7 +37,7 @@ namespace SnakesOOP
         public Player()
         {
             this.winner = false;
-            location = 1;
+            location = null;
         }
 
         public Player(string name, string colour)
@@ -48,5 +48,45 @@ namespace SnakesOOP
         }
 
         //Methods
+        public void Move(int roll, Board GameBoard)
+        {
+            int newSquareNumber;
+            if (location == null)
+            {
+                newSquareNumber = roll;
+            }
+            else
+            {
+                newSquareNumber = location.Number + roll;
+            }
+            if (newSquareNumber > GameBoard.squares.Count)
+            {
+                newSquareNumber = GameBoard.squares.Count;
+                //newSquareNumber =  newSquareNumber - (newSquareNumber - GameBoard.squares.Count);
+            }
+            if (location != null)
+            {
+                location.RemovePlayer(this);
+            } 
+            GameBoard.squares.ElementAt(newSquareNumber - 1).AddPlayer(this);
+        }
+
+        public void ApplyActions(Board GameBoard)
+        {
+            if (location.SqType == "F")
+            {
+                this.winner = true;
+            }
+            else
+            {
+                int newSquareNumber = location.Number + location.Action;
+                if (newSquareNumber > GameBoard.squares.Count)
+                {
+                    newSquareNumber = newSquareNumber - (newSquareNumber - GameBoard.squares.Count);
+                }
+                location.RemovePlayer(this);
+                GameBoard.squares.ElementAt(newSquareNumber - 1).AddPlayer(this);
+            }
+        }
     }
 }

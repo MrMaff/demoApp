@@ -14,7 +14,9 @@ namespace SnakesOOP
     {
         private Queue<Player> players;
         private DiceRoller DieShaker = new DiceRoller(true);
+        private Board GameBoard = new Board();
         private bool turnOver = false;
+        private Form topForm;
 
         public Game()
         {
@@ -22,10 +24,11 @@ namespace SnakesOOP
             
         }
 
-        public Game(Queue<Player> players)
+        public Game(Queue<Player> players, Form topForm)
             :this()
         {
             this.players = players;
+            this.topForm = topForm;
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -37,19 +40,38 @@ namespace SnakesOOP
 
         private void btn_RollDice_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(DieShaker.GetDiceRoll().ToString());
+            
             btn_RollDice.Enabled = false;
+            PlayerTurn(DieShaker.GetDiceRoll());
             btn_Next.Enabled = true;
         }
 
         private void btn_Next_Click(object sender, EventArgs e)
         {
-            Player tempPlayer = players.Dequeue();
-            players.Enqueue(tempPlayer);
-            lbl_PlayerName.Text = players.Peek().Name;
+            if (players.Peek().Location != null)
+            {
+                lbl_PlayerName.Text = players.Peek().Name + " " + players.Peek().Location.Number;
+            }
+            else lbl_PlayerName.Text = players.Peek().Name;
+
             btn_RollDice.Enabled = true;
             btn_Next.Enabled = false;
            
+        }
+
+        private void PlayerTurn(int dieRoll)
+        {
+            Player currentPlayer = players.Dequeue();
+            MessageBox.Show(dieRoll.ToString());
+            currentPlayer.Move(dieRoll, GameBoard);
+            currentPlayer.ApplyActions(GameBoard);
+            if (currentPlayer.Winner)
+            {
+                MessageBox.Show(currentPlayer.Name + "Wins!");
+                topForm.Show();
+                this.Close();
+            }
+            players.Enqueue(currentPlayer);
         }
     }
 

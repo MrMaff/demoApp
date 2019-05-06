@@ -9,26 +9,25 @@ namespace SnakesOOP
     public abstract class Square
     {
         protected int number;
-        protected string type;
+        protected string sqType;
         protected int action;
         protected List<Player> occupiers = new List<Player>();
 
-        public int Number { get; }
+        public int Action { get { return action; } }
+        public int Number { get { return number; } }
+        public string SqType { get { return sqType; } }
 
         public Square()
         { }
 
-        public Square(int number, int action)
+        public Square(int number)
         {
             this.number = number;
-            this.action = action;
         }
-
-        public abstract void Action();
 
         public void AddPlayer(Player currentPlayer)
         {
-            currentPlayer.Location = this.number;
+            currentPlayer.Location = this;
             occupiers.Add(currentPlayer);
         }
 
@@ -37,81 +36,90 @@ namespace SnakesOOP
             occupiers.Remove(currentPlayer);
         }
 
+        
+
     }
 
     public class Normal : Square
     {
         public Normal()
         {
-            this.type = "N";
+            this.sqType = "N";
         }
 
         public Normal(int number, int action)
-            : base(number, action)
+            : base(number)
         {
-            this.type = "N";
+            if (action == 0)
+            {
+                this.action = action;
+            }
+            else throw new ArgumentOutOfRangeException(nameof(action), "final action is not a valid value");
+            this.sqType = "N";
         }
 
-        public override void Action()
-        {
-            //throw new NotImplementedException();
-        }
     }
 
     public class Snake : Square
     {
         public Snake()
         {
-            this.type = "S";
+            this.sqType = "S";
         }
 
         public Snake(int number, int action)
-            : base(number, action)
+            : base(number)
         {
-            this.type = "S";
+            if (action < 0)
+            {
+                this.action = action;
+            }
+            else throw new ArgumentOutOfRangeException(nameof(action), "snake action is not a negative value");
+            this.sqType = "S";
         }
 
-        public override void Action()
-        {
-            //throw new NotImplementedException();
-        }
+       
     }
 
     public class Ladder : Square
     {
         public Ladder()
         {
-            this.type = "L";
+            this.sqType = "L";
         }
 
         public Ladder(int number, int action)
-            : base(number, action)
+            : base(number)
         {
-            this.type = "L";
+            if (action > 0)
+            {
+                this.action = action;
+            }
+            else throw new ArgumentOutOfRangeException(nameof(action), "Ladder action is not a positive value");
+            this.sqType = "L";
         }
 
-        public override void Action()
-        {
-            //throw new NotImplementedException();
-        }
+       
     }
 
     public class Final : Square
     {
         public Final()
         {
-            this.type = "F";
+            this.sqType = "F";
         }
 
         public Final(int number, int action)
-            : base(number, action)
+            : base(number)
         {
-            this.type = "F";
+            if (action == 0)
+            {
+                this.action = action;
+            }
+            else throw new ArgumentOutOfRangeException(nameof(action), "final action is not a valid value");
+            this.sqType = "F";
         }
 
-        public override void Action()
-        {
-            //throw new NotImplementedException();
-        }
+        
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="AddPlayers.Designer.cs">
       <DependentUpon>AddPlayers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Board.cs" />
     <Compile Include="dice.cs" />
     <Compile Include="DiceRoller.cs" />
     <Compile Include="Form1.cs">
