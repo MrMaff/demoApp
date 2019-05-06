@@ -21,5 +21,19 @@ namespace SnakesOOP
         {
             Application.Exit();
         }
+
+        private void btn_NewGame_Click(object sender, EventArgs e)
+        {
+            AddPlayers newPlayers = new AddPlayers();
+            this.Hide();
+            newPlayers.ShowDialog();
+            this.Show();
+
+            //if (newPlayers.ShowDialog()== DialogResult.Cancel)
+            //{
+            //    this.Show();
+            //}
+
+        }
     }
 }

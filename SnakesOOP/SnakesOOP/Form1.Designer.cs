@@ -40,6 +40,7 @@
             this.btn_NewGame.TabIndex = 0;
             this.btn_NewGame.Text = "New Game";
             this.btn_NewGame.UseVisualStyleBackColor = true;
+            this.btn_NewGame.Click += new System.EventHandler(this.btn_NewGame_Click);
             // 
             // btn_Quit
             // 
