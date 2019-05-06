@@ -13,6 +13,7 @@ namespace SnakesOOP
     public partial class Game : Form
     {
         private Queue<Player> players;
+        private DiceRoller DieShaker = new DiceRoller(true);
 
         public Game()
         {
@@ -24,6 +25,11 @@ namespace SnakesOOP
             :this()
         {
             this.players = players;
+        }
+
+        private void btn_RollDice_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(DieShaker.GetDiceRoll().ToString());
         }
     }
 

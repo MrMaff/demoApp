@@ -8,10 +8,12 @@ namespace SnakesOOP
 {
     public class dice
     {
-        int min;
-        int max;
-        int faceValue;
+        private int min;
+        private int max;
+        private int faceValue;
         public int FaceValue { get { return faceValue; } }
+
+        Random rng = new Random(Guid.NewGuid().GetHashCode());
 
         public dice()
         {
@@ -43,8 +45,6 @@ namespace SnakesOOP
 
         public void Roll()
         {
-            Random rng = new Random();
-
             this.faceValue = rng.Next(min, max + 1);
         }
     }

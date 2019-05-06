@@ -70,6 +70,7 @@
             this.btn_RollDice.TabIndex = 3;
             this.btn_RollDice.Text = "Roll Dice";
             this.btn_RollDice.UseVisualStyleBackColor = true;
+            this.btn_RollDice.Click += new System.EventHandler(this.btn_RollDice_Click);
             // 
             // btn_Next
             // 
