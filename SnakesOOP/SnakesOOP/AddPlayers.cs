@@ -73,7 +73,7 @@ namespace SnakesOOP
 
         private void playGame()
         {
-            Game game = new Game(players, topForm);
+            GameWindow game = new GameWindow(players, topForm);
             game.Show();
             this.Close();
             this.DialogResult = DialogResult.OK;

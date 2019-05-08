@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SnakesOOP
 {
-    public partial class Game : Form
+    public partial class GameWindow : Form
     {
         private Queue<Player> players;
         private DiceRoller DieShaker = new DiceRoller(true);
@@ -18,13 +18,13 @@ namespace SnakesOOP
         private bool turnOver = false;
         private Form topForm;
 
-        public Game()
+        public GameWindow()
         {
             InitializeComponent();
             
         }
 
-        public Game(Queue<Player> players, Form topForm)
+        public GameWindow(Queue<Player> players, Form topForm)
             :this()
         {
             this.players = players;
