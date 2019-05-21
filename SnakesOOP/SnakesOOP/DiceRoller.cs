@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Timers;
 
 namespace SnakesOOP
 {
     public class DiceRoller
     {
         private bool doubleRule = true;
-        public dice Dice1 { get; } = new dice();
-        public dice Dice2 { get; } = new dice();
-        public dice Dice3 { get; } = new dice();
+        public Dice Dice1 { get; } = new Dice();
+        public Dice Dice2 { get; } = new Dice();
+        public Dice Dice3 { get; } = new Dice();
 
         public DiceRoller()
         {
@@ -40,5 +42,12 @@ namespace SnakesOOP
 
             return total;
         }
+    }
+
+    public class ShakerBoard
+    {
+        private Image[] dice = new Image[] { Properties.Resources.die1, Properties.Resources.die2, Properties.Resources.die3, Properties.Resources.die4, Properties.Resources.die5, Properties.Resources.die6 };
+
+       
     }
 }

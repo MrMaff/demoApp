@@ -39,6 +39,9 @@
             // 
             // pbx_Board
             // 
+            this.pbx_Board.BackgroundImage = global::SnakesOOP.Properties.Resources.snlboard001;
+            this.pbx_Board.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbx_Board.InitialImage = global::SnakesOOP.Properties.Resources.snlboard001;
             this.pbx_Board.Location = new System.Drawing.Point(12, 12);
             this.pbx_Board.Name = "pbx_Board";
             this.pbx_Board.Size = new System.Drawing.Size(600, 600);
@@ -47,6 +50,7 @@
             // 
             // pbx_Dice
             // 
+            this.pbx_Dice.BackColor = System.Drawing.Color.SeaGreen;
             this.pbx_Dice.Location = new System.Drawing.Point(669, 80);
             this.pbx_Dice.Name = "pbx_Dice";
             this.pbx_Dice.Size = new System.Drawing.Size(300, 300);
@@ -82,7 +86,7 @@
             this.btn_Next.UseVisualStyleBackColor = true;
             this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
-            // Game
+            // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,7 +96,7 @@
             this.Controls.Add(this.lbl_PlayerName);
             this.Controls.Add(this.pbx_Dice);
             this.Controls.Add(this.pbx_Board);
-            this.Name = "Game";
+            this.Name = "GameWindow";
             this.Text = "Game";
             this.Load += new System.EventHandler(this.Game_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Board)).EndInit();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakesOOP
 {
-    public class dice
+    public class Dice
     {
         private int min;
         private int max;
@@ -15,7 +15,7 @@ namespace SnakesOOP
 
         Random rng = new Random(Guid.NewGuid().GetHashCode());
 
-        public dice()
+        public Dice()
         {
             min = 1;
             max = 6;
