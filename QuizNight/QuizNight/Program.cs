@@ -23,7 +23,7 @@ namespace QuizNight
         {
             Console.Clear();
             Console.WriteLine("Quiz Night!");
-            Console.WriteLine("============/n");
+            Console.WriteLine("============\n");
         }
 
         static void GetUserName()
