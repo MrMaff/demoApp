@@ -11,65 +11,98 @@ namespace CipherApp
         static void Main(string[] args)
         {
 
-            string message = Encrypt("Cheese Please!", 15);
+            string message = Encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnpqrstuvwxyz", 15, 7);
             Console.WriteLine(message);
-            Console.WriteLine(Decrypt(message, 15));
+            Console.WriteLine(Decrypt(message, 15, 7));
 
             Console.ReadKey();
         }
 
-        static string Encrypt(string plaintext, int shiftkey)
+        static string Encrypt(string plaintext, int shiftkey1, int shiftkey2)
         {
             string cipherText = "";
 
             for (int i = 0; i < plaintext.Length; i++)
             {
-                int chrCode = (int) plaintext[i];
-                if (Char.IsUpper(plaintext[i]))
+                int key;
+                if (i % 2 == 0)
                 {
-                    chrCode = chrCode - 65;
-                    chrCode = chrCode + shiftkey;
-                    chrCode = chrCode % 26;
-                    chrCode = chrCode + 65;
+                    key = shiftkey1;
                 }
-                else if (Char.IsLower(plaintext[i]))
+                else
                 {
-                    chrCode = chrCode - 97;
-                    chrCode = chrCode + shiftkey + 26;
-                    chrCode = chrCode % 26;
-                    chrCode = chrCode + 97;
+                    key = shiftkey2;
                 }
-                cipherText = cipherText + (char)chrCode;
+                
+                cipherText = cipherText + EncodeLetter(plaintext[i],key);
             }
 
             return cipherText;
         }
 
-        static string Decrypt(string cipherText, int shiftkey)
+        static string Decrypt(string cipherText, int shiftkey1, int shiftkey2)
         {
             string plainText = "";
 
             for (int i = 0; i < cipherText.Length; i++)
             {
-                int chrCode = (int)cipherText[i];
-                if (Char.IsUpper(cipherText[i]))
+                int key;
+                if (i % 2 == 0)
                 {
-                    chrCode = chrCode - 65;
-                    chrCode = chrCode - shiftkey + 26;
-                    chrCode = chrCode % 26;
-                    chrCode = chrCode + 65;
+                    key = shiftkey1;
                 }
-                else if (Char.IsLower(cipherText[i]))
+                else
                 {
-                    chrCode = chrCode - 97;
-                    chrCode = chrCode - shiftkey + 26;
-                    chrCode = chrCode % 26;
-                    chrCode = chrCode + 97;
+                    key = shiftkey2;
                 }
-                plainText = plainText + (char)chrCode;
+                plainText = plainText + DecodeLetter(cipherText[i], key);
             }
 
             return plainText;
+        }
+
+        static char EncodeLetter (char letter, int shiftkey)
+        {
+            int chrCode = (int)letter;
+            if (Char.IsUpper(letter))
+            {
+                chrCode = chrCode - 65;
+                chrCode = chrCode + shiftkey;
+                chrCode = chrCode % 26;
+                chrCode = chrCode + 65;
+            }
+            else if (Char.IsLower(letter))
+            {
+                chrCode = chrCode - 97;
+                chrCode = chrCode + shiftkey + 26;
+                chrCode = chrCode % 26;
+                chrCode = chrCode + 97;
+            }
+
+            letter = (char)chrCode;
+
+            return letter;
+        }
+
+        static char DecodeLetter(char letter, int shiftkey)
+        {
+            int chrCode = (int)letter;
+            if (Char.IsUpper(letter))
+            {
+                chrCode = chrCode - 65;
+                chrCode = chrCode - shiftkey + 26;
+                chrCode = chrCode % 26;
+                chrCode = chrCode + 65;
+            }
+            else if (Char.IsLower(letter))
+            {
+                chrCode = chrCode - 97;
+                chrCode = chrCode - shiftkey + 26;
+                chrCode = chrCode % 26;
+                chrCode = chrCode + 97;
+            }
+            letter = (char)chrCode;
+            return letter;
         }
     }
 }
