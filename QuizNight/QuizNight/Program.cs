@@ -8,15 +8,17 @@ namespace QuizNight
 {
     class Program
     {
-        static string name;
-        static int score;
+       
 
         static void Main(string[] args)
         {
+            string name;
+            int score;
+
             DisplayQuizName();
-            GetUserName();
-            PlayQuiz();
-            DisplayScore();
+            GetUserName(out name);
+            PlayQuiz(out score);
+            DisplayScore(score);
             AnyKey();
         }
 
@@ -27,15 +29,16 @@ namespace QuizNight
             Console.WriteLine("============\n");
         }
 
-        static void GetUserName()
+        static void GetUserName(out string name)
         {
             Console.WriteLine("Player, please enter your name...");
             Console.Write("Name: ");
             name = Console.ReadLine();
         }
 
-        static void PlayQuiz()
+        static void PlayQuiz(out int score)
         {
+            //Declare Question Array
             string[,] quiz = {
 
                 {"What is 15.75 in fixed point binary?","11111100" },
@@ -49,22 +52,22 @@ namespace QuizNight
                 {"When using parameters in procedures, objects and arrays are passed by...","reference" },
                 {"Which type of subroutine always returns a value?","function" }
             };
-
-
+            score = 0;
+            //Ask the Questions
             for (int i = 0; i < 10; i++)
             {
                 DisplayQuizName();
-                AskQuestion(quiz[i,0],quiz[i,1]);
+                AskQuestion(quiz[i,0],quiz[i,1], ref score);
             }
 
         }
 
-        static void DisplayScore()
+        static void DisplayScore(int score)
         {
             Console.WriteLine("\nThe score is : {0}\n", score);
         }
 
-        static void AskQuestion(string question, string answer)
+        static void AskQuestion(string question, string answer, ref int score)
         {
             string userAnswer;
 
