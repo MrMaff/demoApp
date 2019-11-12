@@ -21,14 +21,54 @@ namespace CipherApp
         static string Encrypt(string plaintext, int shiftkey)
         {
             string cipherText = "";
-            //Enter code to encrypt message here
+
+            for (int i = 0; i < plaintext.Length; i++)
+            {
+                int chrCode = (int) plaintext[i];
+                if (Char.IsUpper(plaintext[i]))
+                {
+                    chrCode = chrCode - 65;
+                    chrCode = chrCode + shiftkey;
+                    chrCode = chrCode % 26;
+                    chrCode = chrCode + 65;
+                }
+                else if (Char.IsLower(plaintext[i]))
+                {
+                    chrCode = chrCode - 97;
+                    chrCode = chrCode + shiftkey + 26;
+                    chrCode = chrCode % 26;
+                    chrCode = chrCode + 97;
+                }
+                cipherText = cipherText + (char)chrCode;
+            }
+
             return cipherText;
         }
 
         static string Decrypt(string cipherText, int shiftkey)
         {
             string plainText = "";
-            //Enter code to decrypt message here
+
+            for (int i = 0; i < cipherText.Length; i++)
+            {
+                int chrCode = (int)cipherText[i];
+                if (Char.IsUpper(cipherText[i]))
+                {
+                    chrCode = chrCode - 65;
+                    chrCode = chrCode - shiftkey + 26;
+                    chrCode = chrCode % 26;
+                    chrCode = chrCode + 65;
+                }
+                else if (Char.IsLower(cipherText[i]))
+                {
+                    chrCode = chrCode - 97;
+                    chrCode = chrCode - shiftkey + 26;
+                    chrCode = chrCode % 26;
+                    chrCode = chrCode + 97;
+                }
+                plainText = plainText + (char)chrCode;
+            }
+
             return plainText;
         }
     }
