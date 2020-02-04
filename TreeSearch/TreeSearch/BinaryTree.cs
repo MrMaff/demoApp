@@ -74,7 +74,7 @@ namespace TreeSearch
             {
                 Array.Sort(numberData);
             }
-
+            //Set Root Node
             int mid = numberData.Length / 2;
             this.rootNode = new TreeNode(numberData[mid]);
             //Add to the right
@@ -89,14 +89,11 @@ namespace TreeSearch
             this.rootNode.Add(new TreeNode(numberData[mid]));
             if (lpointer < rpointer)
             {
-                
                 //Add to the right
                 AddMid(numberData, mid + 1, rpointer);
                 //Add to the Left
                 AddMid(numberData, lpointer, mid - 1);
             }
-            
-
         }
 
        public bool Contains(int num)
