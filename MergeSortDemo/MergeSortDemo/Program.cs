@@ -11,7 +11,7 @@ namespace MergeSortDemo
         static void Main(string[] args)
         {
             //Create Array
-            int[] elephant = CreateNumberArray(30);
+            int[] elephant = CreateNumberArray(10000);
 
             //Display Array
             Console.WriteLine("Unsorted Array:\n");
@@ -21,12 +21,15 @@ namespace MergeSortDemo
             Console.WriteLine("==============");
             Console.WriteLine("The Merge Sort");
             Console.WriteLine("==============\n");
+            DateTime StartTime = DateTime.Now;
             MergeSort(elephant, 0, elephant.Length - 1);
+            DateTime EndTime = DateTime.Now;
+            TimeSpan TimeTaken = EndTime - StartTime;
 
             //Display Array
             Console.WriteLine("Sorted Array:\n");
             OutputArray(elephant);
-
+            Console.WriteLine(TimeTaken.TotalMilliseconds);
             Console.ReadKey();
         }
 
@@ -36,7 +39,7 @@ namespace MergeSortDemo
             int[] tempArray = new int[numberRqd];
             for (int i = 0; i < tempArray.Length; i++)
             {
-                tempArray[i] = rnd.Next(1, 51);
+                tempArray[i] = rnd.Next(1, 50001);
             }
             return tempArray;
         }
@@ -90,10 +93,10 @@ namespace MergeSortDemo
             for (i = 0; i < num_elements; i++)
             {
                 numbers[right] = temp[right];
-                Console.Write(numbers[right].ToString().PadLeft(3)); //delete me
+                //Console.Write(numbers[right].ToString().PadLeft(3)); //delete me
                 right--;
             }
-            Console.WriteLine();
+            //Console.WriteLine();//delete me
         }
 
     }

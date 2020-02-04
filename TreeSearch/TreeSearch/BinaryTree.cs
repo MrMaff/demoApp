@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TreeSearch
 {
-
     class TreeNode
     {
         public int Number { get; }
@@ -18,46 +17,6 @@ namespace TreeSearch
             this.Number = number;
         }
 
-        public void Add(TreeNode NewLeaf)
-        {
-            if (NewLeaf.Number < this.Number)
-            {
-                if (this.left == null)
-                {
-                    this.left = NewLeaf;
-                }
-                else
-                {
-                    this.left.Add(NewLeaf);
-                }
-            }
-            if (NewLeaf.Number > this.Number)
-            {
-                if (this.right == null)
-                {
-                    this.right = NewLeaf;
-                }
-                else
-                {
-                    this.right.Add(NewLeaf);
-                }
-            }
-        }
-
-        public bool Contains(int num)
-        {
-            bool present = true;
-            if (this.Number == num)
-            {
-                present = true;
-            }
-            else if((this.left == null || this.left.Contains(num) == false) && (this.right == null || this.right.Contains(num)==false))
-            {
-                present = false;
-            }
-
-            return present;
-        }
     }
 
     class BinaryTree
@@ -86,7 +45,7 @@ namespace TreeSearch
         private void AddMid(int[] numberData, int lpointer, int rpointer)
         {
             int mid = (lpointer + rpointer) / 2;
-            this.rootNode.Add(new TreeNode(numberData[mid]));
+            Add(this.rootNode, new TreeNode(numberData[mid]));
             if (lpointer < rpointer)
             {
                 //Add to the right
@@ -96,9 +55,56 @@ namespace TreeSearch
             }
         }
 
+        public bool Add(TreeNode CurrentNode, TreeNode NewLeaf)
+        {
+            bool added;
+            if (NewLeaf.Number < CurrentNode.Number)
+            {
+                if (CurrentNode.left == null)
+                {
+                    CurrentNode.left = NewLeaf;
+                    added = true;
+                }
+                else
+                {
+                    added = Add(CurrentNode.left, NewLeaf);
+                }
+            }
+            else if (NewLeaf.Number > CurrentNode.Number)
+            {
+                if (CurrentNode.right == null)
+                {
+                    CurrentNode.right = NewLeaf;
+                    added = true;
+                }
+                else
+                {
+                    added = Add(CurrentNode.right, NewLeaf);
+                }
+            }
+            else added = false;
+            return added;
+        }
+
        public bool Contains(int num)
         {
-            return this.rootNode.Contains(num);
+            return CheckContains(num, this.rootNode);
+        }
+
+        private bool CheckContains(int num, TreeNode CurrentNode)
+        {
+            bool present = true;
+            if (CurrentNode.Number == num)
+            {
+                present = true;
+            }
+            else if ((CurrentNode.left == null || CheckContains(num, CurrentNode.left) == false) && (CurrentNode.right == null || CheckContains(num, CurrentNode.right) == false))
+            {
+                present = false;
+            }
+
+            return present;
+
         }
     }
 

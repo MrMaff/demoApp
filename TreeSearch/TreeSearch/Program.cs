@@ -20,6 +20,7 @@ namespace TreeSearch
                 BinaryTree myTree = new BinaryTree(NumberArray, false);
 
                 Console.WriteLine(myTree.Contains(searchNo));
+
                 Console.ReadKey();
 
         }
