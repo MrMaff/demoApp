@@ -38,7 +38,7 @@
         'Display Phones & Tablets
         For index = 0 To itemCode.Length - 1
             If category(index) = "Phone" Or category(index) = "Tablet" Then
-                Console.WriteLine(category(index).PadRight(8) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
+                Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
             End If
         Next
         Console.WriteLine()
@@ -66,7 +66,7 @@
         If phone Then
             For index = 0 To itemCode.Length - 1
                 If category(index) = "SIM card" Then
-                    Console.WriteLine(category(index).PadRight(8) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
+                    Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
                 End If
             Next
             Console.WriteLine()
@@ -90,9 +90,51 @@
         End If
 
         'Display Case choice
+        For index = 0 To itemCode.Length - 1
+            If category(index) = "Case" Then
+                Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
+            End If
+        Next
+        Console.WriteLine()
         'Get customer case choice
+        Do
+            Console.Write("Enter the ItemCode of the device: ")
+            tempChoice = Console.ReadLine().ToUpper()
+            validCode = False
+            For index = 0 To itemCode.Length - 1
+                If category(index) = "Case" And tempChoice = itemCode(index) Then
+                    validCode = True
+                    totalPrice = totalPrice + price(index)
+                End If
+            Next
+            If validCode = False Then
+                Console.Beep()
+                Console.WriteLine("Invalid Item Code")
+            End If
+        Loop Until validCode = True
         'Display Charger Choice
+        'For index = 0 To itemCode.Length - 1
+        '    If category(index) = "Charger" Then
+        '        Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
+        '    End If
+        'Next
+        'Console.WriteLine()
         'get customer charger choice
+        Do
+            Console.Write("Enter the ItemCode of the device: ")
+            tempChoice = Console.ReadLine().ToUpper()
+            validCode = False
+            For index = 0 To itemCode.Length - 1
+                If category(index) = "Charger" And tempChoice = itemCode(index) Then
+                    validCode = True
+                    totalPrice = totalPrice + price(index)
+                End If
+            Next
+            If validCode = False Then
+                Console.Beep()
+                Console.WriteLine("Invalid Item Code")
+            End If
+        Loop Until validCode = True
         'Calculate total price
         'Display customer order
 
@@ -103,9 +145,9 @@
     Sub Title()
 
         Console.Clear()
-        Console.WriteLine("╔══════════════════╗".PadLeft(36))
-        Console.WriteLine("║ Mr Long's Phones ║".PadLeft(36))
-        Console.WriteLine("╚══════════════════╝".PadLeft(36))
+        Console.WriteLine("╔══════════════════╗".PadLeft(37))
+        Console.WriteLine("║ Mr Long's Phones ║".PadLeft(37))
+        Console.WriteLine("╚══════════════════╝".PadLeft(37))
         Console.WriteLine()
 
     End Sub
