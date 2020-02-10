@@ -30,6 +30,7 @@
         Dim validCode As Boolean
         Dim phone As Boolean = False
         Dim order(4) As String
+        Dim numOfChargers As Integer
 
         'Variables for Calculated values
         Dim totalPrice As Decimal
@@ -113,30 +114,42 @@
             End If
         Loop Until validCode = True
         'Display Charger Choice
-        'For index = 0 To itemCode.Length - 1
-        '    If category(index) = "Charger" Then
-        '        Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
-        '    End If
-        'Next
-        'Console.WriteLine()
-        'get customer charger choice
-        Do
-            Console.Write("Enter the ItemCode of the device: ")
-            tempChoice = Console.ReadLine().ToUpper()
-            validCode = False
-            For index = 0 To itemCode.Length - 1
-                If category(index) = "Charger" And tempChoice = itemCode(index) Then
-                    validCode = True
-                    totalPrice = totalPrice + price(index)
-                End If
-            Next
-            If validCode = False Then
-                Console.Beep()
-                Console.WriteLine("Invalid Item Code")
+        For index = 0 To itemCode.Length - 1
+            If category(index) = "Charger" Then
+                Console.WriteLine(category(index).PadRight(10) & itemCode(index).PadRight(6) & description(index).PadRight(30) & price(index).ToString().PadLeft(8))
             End If
-        Loop Until validCode = True
+        Next
+        Console.WriteLine()
+        'get customer charger choice
+
+        Console.WriteLine("How many Charges would you like?")
+        While Integer.TryParse(Console.ReadLine(), numOfChargers) = False Or numOfChargers > 5
+            Console.WriteLine("Enter a number between 0 and 5")
+        End While
+        For charger = 1 To numOfChargers
+            Do
+                Console.Write("Enter the ItemCode of the device: ")
+                tempChoice = Console.ReadLine().ToUpper()
+                validCode = False
+                For index = 0 To itemCode.Length - 1
+                    If category(index) = "Charger" And tempChoice = itemCode(index) Then
+                        validCode = True
+                        totalPrice = totalPrice + price(index)
+                    End If
+                Next
+                If validCode = False Then
+                    Console.Beep()
+                    Console.WriteLine("Invalid Item Code")
+                End If
+            Loop Until validCode = True
+        Next
+
         'Calculate total price
         'Display customer order
+        Title()
+        For index = 0 To 10
+
+        Next
 
         Console.ReadKey()
 
