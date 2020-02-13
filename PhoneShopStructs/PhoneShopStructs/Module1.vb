@@ -47,8 +47,8 @@
         Next
     End Sub
 
-    Function GetValidStockItem(stock() As ShopItem, category As String, code As String) As ShopItem
-        Dim requestedItem As ShopItem?
+    Function GetValidStockItem(stock() As ShopItem, category As String, code As String) As ShopItem?
+        Dim requestedItem As ShopItem? = Nothing
 
         For index = 0 To stock.Length - 1
             If stock(index).Category = category And code = stock(index).ItemCode Then
@@ -59,25 +59,26 @@
         Return requestedItem
     End Function
 
-    Function GetItem(stock() As ShopItem, category As String)
-        Dim tempItem As ShopItem?
+    Function GetItem(stock() As ShopItem, category As String) As ShopItem?
+        Dim tempItem As ShopItem? = Nothing
 
         DisplayCat(stock, category)
         Console.Write("Enter Item code: ")
-        tempItem = GetValidStockItem(stock, category, Console.ReadLine())
+        tempItem = GetValidStockItem(stock, category, Console.ReadLine().ToUpper())
         While tempItem Is Nothing
             Console.WriteLine("Invalid code.")
             Console.Write("Enter Item code: ")
-            tempItem = GetValidStockItem(stock, category, Console.ReadLine())
-
-            Return tempItem
+            tempItem = GetValidStockItem(stock, category, Console.ReadLine().ToUpper())
         End While
+        Return tempItem
     End Function
     Sub Main()
 
         Dim stock() As ShopItem = LoadStock()
         Dim order(6) As ShopItem
+        Dim orderNum As Integer = 0
         Dim choice As Integer
+        Dim validChoice As Boolean
 
         Title()
 
@@ -89,19 +90,55 @@
         Console.WriteLine("Would you like:")
         Console.WriteLine("1. Phone")
         Console.WriteLine("2. Tablet")
-        Integer.TryParse(Console.ReadLine(), choice)
-        Select Case choice
-            Case 1
-                order(0) = GetItem(stock, "Phone")
-                order(1) = GetItem(stock, "SIM")
-            Case 2
-                order(0) = GetItem(stock, "Tablet")
-            Case Else
-                Console.WriteLine("Invalid Choice please choose again")
-        End Select
+        Do
+            validChoice = True
+            Integer.TryParse(Console.ReadLine(), choice)
+            Select Case choice
+                Case 1
+                    order(orderNum) = GetItem(stock, "Phone")
+                    orderNum = orderNum + 1
+                    order(1) = GetItem(stock, "SIM card")
+                    orderNum = orderNum + 1
+                Case 2
+                    order(0) = GetItem(stock, "Tablet")
+                    orderNum = orderNum + 1
+                Case Else
+                    Console.WriteLine("Invalid Choice please choose again")
+                    validChoice = False
+            End Select
+        Loop Until validChoice = True
+
+        Title()
+        order(orderNum) = GetItem(stock, "Case")
+        orderNum = orderNum + 1
+
+        Console.WriteLine("Would you like:")
+        Console.WriteLine("1. No Chargers")
+        Console.WriteLine("2. One Charger")
+        Console.WriteLine("3. Two Chargers")
+
+        Do
+            validChoice = True
+            Integer.TryParse(Console.ReadLine(), choice)
+            Select Case choice
+                Case 1
+                    Console.WriteLine("You have chosen not to order a charger.")
+                Case 2
+                    order(orderNum) = GetItem(stock, "Charger")
+                    orderNum = orderNum + 1
+                Case 3
+                    order(orderNum) = GetItem(stock, "Charger")
+                    orderNum = orderNum + 1
+                    order(orderNum) = GetItem(stock, "Charger")
+                    orderNum = orderNum + 1
+                Case Else
+                    Console.WriteLine("Invalid Choice please choose again")
+                    validChoice = False
+            End Select
+        Loop Until validChoice = True
 
 
-
+        Console.ReadKey()
 
     End Sub
 
