@@ -29,7 +29,7 @@
         Dim tempChoice As String
         Dim validCode As Boolean
         Dim phone As Boolean = False
-        Dim order(4) As String
+        Dim order(8) As String
         Dim numOfChargers As Integer
 
         'Variables for Calculated values
@@ -164,6 +164,8 @@
         Console.WriteLine()
 
     End Sub
+
+
 
 
 End Module
