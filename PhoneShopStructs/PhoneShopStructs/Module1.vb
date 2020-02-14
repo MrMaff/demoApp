@@ -5,7 +5,6 @@
         Public Category As String
         Public Description As String
         Public Price As Decimal
-
     End Structure
 
     Function LoadStock() As Array
@@ -72,10 +71,30 @@
         End While
         Return tempItem
     End Function
+
+    Sub DisplayOrder(order() As ShopItem)
+        For index = 0 To order.Length - 1
+            If order(index).Category <> "" Then
+                Console.WriteLine(order(index).Category.PadRight(10) & order(index).ItemCode.PadRight(6) & order(index).Description.PadRight(30) & order(index).Price.ToString().PadLeft(8))
+            End If
+        Next
+    End Sub
+
+    Function CalculateTotal(order() As ShopItem) As Decimal
+        Dim total As Decimal = 0
+
+        For index = 0 To order.Length - 1
+            total = total + order(index).Price
+
+        Next
+        Return total
+
+    End Function
     Sub Main()
 
         Dim stock() As ShopItem = LoadStock()
         Dim order(6) As ShopItem
+        Dim total As Decimal
         Dim orderNum As Integer = 0
         Dim choice As Integer
         Dim validChoice As Boolean
@@ -95,11 +114,13 @@
             Integer.TryParse(Console.ReadLine(), choice)
             Select Case choice
                 Case 1
+                    Title()
                     order(orderNum) = GetItem(stock, "Phone")
                     orderNum = orderNum + 1
-                    order(1) = GetItem(stock, "SIM card")
+                    order(orderNum) = GetItem(stock, "SIM card")
                     orderNum = orderNum + 1
                 Case 2
+                    Title()
                     order(0) = GetItem(stock, "Tablet")
                     orderNum = orderNum + 1
                 Case Else
@@ -137,7 +158,12 @@
             End Select
         Loop Until validChoice = True
 
+        Title()
 
+        DisplayOrder(order)
+        Console.WriteLine()
+        total = CalculateTotal(order)
+        Console.WriteLine("The total price is £{0}", total)
         Console.ReadKey()
 
     End Sub
