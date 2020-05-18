@@ -8,9 +8,22 @@ namespace BlackJackConsole
 {
     class Deck
     {
-        private List<Card> cards = new List<Card>();
+        private Stack<Card> cards = new Stack<Card>();
         
         public Deck()
+        {
+            CreateDeck();
+        }
+
+        public Deck(int packs)
+        {
+            for (int i = 0; i < packs; i++)
+            {
+                CreateDeck();
+            }
+        }
+
+        private void CreateDeck()
         {
             for (int i = 0; i < 52; i++)
             {
@@ -23,29 +36,28 @@ namespace BlackJackConsole
 
         public void AddCard(Card tempCard)
         {
-            cards.Add(tempCard);
+            cards.Push(tempCard);
         }
 
         public Card DealCard()
         {
-            Card tempCard = cards[0];
-            cards.RemoveAt(0);
-            return tempCard;
+            return cards.Pop();
         }
 
         public void Shuffle()
         {
-            Random rnd = new Random();
-            List<Card> tempList = new List<Card>();
-            int tempCount = cards.Count;
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            List<Card> tempList = this.cards.ToList();
+            this.cards.Clear();
+            int tempCount = tempList.Count;
 
             for (int i = 0; i < tempCount; i++)
             {
-                int location = rnd.Next(0, cards.Count);
-                tempList.Add(cards[location]);
-                cards.RemoveAt(location);
+                int location = rnd.Next(0, tempList.Count);
+                this.cards.Push(tempList[location]);
+                tempList.RemoveAt(location);
             }
-            cards = tempList;
+            
         }
     }
 }

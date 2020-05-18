@@ -10,15 +10,36 @@ namespace BlackJackConsole
     {
         static void Main(string[] args)
         {
-            Deck myDeck = new Deck();
-            myDeck.Shuffle();
-            for (int i = 0; i < 52; i++)
+
+            Game game = new Game();
+
+            while (game.gameState == 0)
             {
-                Card tempCard = myDeck.DealCard();
+                game.DisplayPlayerCredits();
 
-                Console.WriteLine("{0} {1}",tempCard.face, tempCard.suit);
+                game.PlayRound();
 
+                AnyKey();
+                Console.Clear();
             }
+
+            if (game.gameState == GameState.Lost)
+            {
+                Console.WriteLine("Sorry You lost all your Credits!");
+            }
+            else
+            {
+                Console.WriteLine("Congratulations you have beaten the house!");
+            }
+            AnyKey();
+
+
+        }
+
+        static void AnyKey()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
