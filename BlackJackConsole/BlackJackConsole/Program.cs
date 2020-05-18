@@ -13,7 +13,7 @@ namespace BlackJackConsole
 
             Game game = new Game();
 
-            while (game.gameState == 0)
+            while (game.GameState == 0)
             {
                 game.DisplayPlayerCredits();
 
@@ -23,13 +23,14 @@ namespace BlackJackConsole
                 Console.Clear();
             }
 
-            if (game.gameState == GameState.Lost)
+            if (game.GameState == GameStates.Lost)
             {
                 Console.WriteLine("Sorry You lost all your Credits!");
             }
             else
             {
                 Console.WriteLine("Congratulations you have beaten the house!");
+                game.DisplayPlayerCredits();
             }
             AnyKey();
 

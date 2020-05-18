@@ -30,7 +30,7 @@ namespace BlackJackConsole
                 int cardNum = (i % 13) + 1;
                 int suitNum = i % 4;
 
-                AddCard(new Card((Suit)suitNum, cardNum));
+                AddCard(new Card((Suits)suitNum, cardNum));
             }
         }
 

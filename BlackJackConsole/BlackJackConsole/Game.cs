@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BlackJackConsole
 {
     public enum Moves { Bust, Hit, Stick};
-    public enum GameState { Win = 1, InPlay = 0, Lost = -1};
+    public enum GameStates { Win = 1, InPlay = 0, Lost = -1};
 
     class Game
     {
@@ -16,16 +16,16 @@ namespace BlackJackConsole
         private HumanPlayer player1 = new HumanPlayer();
         private Dealer dealer = new Dealer();
 
-        public GameState gameState { get
+        public GameStates GameState { get
             {
-                GameState tempState = GameState.InPlay;
+                GameStates tempState = GameStates.InPlay;
                 if (player1.Credits >= 10)
                 {
-                    tempState = GameState.Win;
+                    tempState = GameStates.Win;
                 }
                 if (player1.Credits == 0)
                 {
-                    tempState = GameState.Lost;
+                    tempState = GameStates.Lost;
                 }
 
                 return tempState;
@@ -42,14 +42,14 @@ namespace BlackJackConsole
             int playerStake = 1;
             Moves playerStatus;
 
-            player1.removeCredit();
+            player1.RemoveCredit();
 
             //Deal 1st Card
             dealer.AddCard(deck.DealCard());
             player1.AddCard(deck.DealCard());
 
             Console.WriteLine(" The Dealer Holds: ");
-            Console.WriteLine("{0} {1}\n", dealer.hand.cards[0].face, dealer.hand.cards[0].suit);
+            Console.WriteLine("{0} {1}\n", dealer.hand.cards[0].Face, dealer.hand.cards[0].Suit);
             Console.WriteLine("You Hold: ");
             DisplayHand(player1.hand);
             //Players Place Bets
@@ -70,7 +70,9 @@ namespace BlackJackConsole
                 if (player1.hand.Total == 21)
                 {
                     //if Player is 21 then Player gets stake X 3
+                    Console.WriteLine("21! You win the Hand");
                     player1.AddCredits(playerStake * 3);
+
                 }
                 else
                 {
@@ -78,19 +80,23 @@ namespace BlackJackConsole
 
                     DealerMove();
 
-                    if (dealer.hand.validHand())
+                    if (dealer.hand.ValidHand())
                     {
                         if (player1.hand.Total > dealer.hand.Total)
                         {
                             player1.AddCredits(playerStake * 2);
+                            Console.WriteLine("You win the Hand");
                         }
+                        else { Console.WriteLine("The Dealer wins the hand."); }
                     }
                     else
                     {
+                        Console.WriteLine("The Dealer is Bust.");
                         player1.AddCredits(playerStake);
                     }
                 }
             }
+            else { Console.WriteLine("You are Bust!"); }
 
             player1.hand.ClearHand();
             dealer.hand.ClearHand();
@@ -100,7 +106,7 @@ namespace BlackJackConsole
         {
             foreach (var card in tempHand.cards)
             {
-                Console.WriteLine("{0} {1}", card.face, card.suit);
+                Console.WriteLine("{0} {1}", card.Face, card.Suit);
             }
 
         }
@@ -130,11 +136,11 @@ namespace BlackJackConsole
         {
             Moves playerAction = PlayerChoice();
 
-            while (player1.hand.validHand() && playerAction == Moves.Hit)
+            while (player1.hand.ValidHand() && playerAction == Moves.Hit)
             {
                 player1.AddCard(deck.DealCard());
                 DisplayHand(player1.hand);
-                if (player1.hand.validHand())
+                if (player1.hand.ValidHand())
                 {
                     playerAction = PlayerChoice();
                 }
@@ -171,7 +177,7 @@ namespace BlackJackConsole
                 } while (int.TryParse(Console.ReadLine(), out increase)==false || increase < 0 || increase > creditsAvailable);
             }
 
-            player1.removeCredit(increase);
+            player1.RemoveCredit(increase);
             return increase;
         }
 
