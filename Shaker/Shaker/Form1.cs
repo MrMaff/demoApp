@@ -16,8 +16,8 @@ namespace Shaker
 
     public partial class Form1 : Form
     {
-        
 
+        Roller gameRoller = new Roller();
         public Form1()
         {
             InitializeComponent();
@@ -25,9 +25,20 @@ namespace Shaker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Bitmap myImage = new Bitmap(800, 800);
+             pbx_Shaker.Image = new BoardDrawer().DrawBoard();
+        }
 
-            pbx_Shaker.Image = myImage;
+        private void btn_Roll_Click(object sender, EventArgs e)
+        {
+            gameRoller.RollDice();
+            if (gameRoller.IsADouble())
+            {
+                pbx_Shaker.Image = new BoardDrawer().DrawBoard(gameRoller.die1.Face, gameRoller.die2.Face, gameRoller.die3.Face);
+            }
+            else
+            {
+                pbx_Shaker.Image = new BoardDrawer().DrawBoard(gameRoller.die1.Face, gameRoller.die2.Face);
+            }
         }
     }
 }
